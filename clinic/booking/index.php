@@ -148,17 +148,36 @@ i{
 
 					echo '<td>';
 					if(is_array($check_tutor)){ //Multi tutor in one period
-						foreach($check_tutor as $multi_tutor_name){
+
+						$tutors=array();
+
+						while(is_array($check_tutor)){
+							$tutors[]=$check_tutor[1];
+							if(is_array($check_tutor[0])){
+									$check_tutor=$check_tutor[0];
+									continue;
+							}
+							else{
+								$tutors[]=$check_tutor[0];
+								break;
+							}
+						}
+
+
+
+						foreach($tutors as $multi_tutor_name){
 							$appointment_sql = mysql_query("SELECT * FROM `appointment` WHERE `deleted`=0 AND `date`='$check_date' AND `period`='$period' AND `foreign`='$foreign' AND `tutor`='$multi_tutor_name'");
 							$count_appointment_foreign = mysql_num_rows($appointment_sql);
 							$tutor_leave = mysql_fetch_assoc(mysql_query("SELECT * FROM `tutor_leave` WHERE `date`='$check_date' AND `period`='$period' AND `tutor`='$multi_tutor_name' AND `approve`=1"));
 
 							if($multi_tutor_name){ //Has tutor start
-								//echo "<script>console.log('".var_dump($multi_tutor_name)."');</script>";
+
+
+								echo "<script>console.log('".$multi_tutor_name."');</script>";
 								$str=$multi_tutor_name;
 								$str=explode('-',$str);
 								$str2=$str[0];
-								//echo "<script>console.log('".$str2."');</script>";
+								echo "<script>console.log('".$str2."');</script>";
 								echo '
 								<div class="ui secondary teal raised segment">
 									<div>'.$tutor_desc[$multi_tutor_name].' ('.$str2.')</div>';
@@ -605,4 +624,7 @@ function array_merge_recursive_new($first, $second){
     }
     return $result;
 }
+
+
+
 ?>
