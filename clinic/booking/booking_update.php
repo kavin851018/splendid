@@ -1,5 +1,4 @@
 <?php
-
 header('Content-type: application/json');
 $db = 'booking';
 require('../../connect_db.php');
@@ -20,7 +19,7 @@ $foreign = $_POST['foreign'];
 switch($_POST['type']){
 	case 'register':
 		$id_check = mysql_fetch_assoc(mysql_query("SELECT * FROM `appointment` WHERE `id`='$id' AND `date`='$date' AND `period`='$period' AND `deleted`=0"));
-		$period_check = mysql_fetch_assoc(mysql_query("SELECT * FROM `appointment` WHERE `date`='$date' AND `period`='$period' AND `tutor`='$tutor' AND `foreign`=2 AND `deleted`=0 LIMIT 1"));
+		$period_check = mysql_fetch_assoc(mysql_query("SELECT * FROM `appointment` WHERE `date`='$date' AND `period`='$period' AND `tutor`='$tutor' AND `foreign`=0 AND `deleted`=0 LIMIT 1"));
 		$blacklist_check = mysql_fetch_assoc(mysql_query("SELECT * FROM `blacklist` WHERE ('$date' BETWEEN `start_date` AND `end_date`) AND `id`='$id' AND `deleted`=0 LIMIT 1"));
 		$register_limit_check = mysql_num_rows(mysql_query("SELECT * FROM `appointment` WHERE `id`='$id' AND (`date` BETWEEN '$this_monday' AND '$this_friday') AND `deleted`=0"));
 		$register = "INSERT INTO `appointment`(`name`,`id`,`phone`,`email`,`content`,`date`,`period`,`tutor`,`foreign`) VALUES ('$name','$id','$phone','$email','$content','$date','$period','$tutor','$foreign')";

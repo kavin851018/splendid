@@ -221,69 +221,9 @@ i{
 							//Appointment exist
 							elseif($appointment = mysql_fetch_assoc($appointment_sql)){
 								if($foreign == 0){
-									$tutor_desc_explode = explode(',', $tutor_desc[$multi_tutor_name]);
 									echo '
-									<div><i class="teal user icon"></i>'.$appointment['id'].'</div>'; //The first appointment
-									while($appointment_foreign = mysql_fetch_array($appointment_sql)){
-										echo '<div><i class="teal user icon"></i>'.$appointment_foreign['id'].'</div>'; //Print the rest appointment of this foreign period excluding the first one
-									}
-									if($count_appointment_foreign<5){ //Maximum 5 appointments for foreign tutor
-										echo '
-										<i class="large teal book icon register" data-content="Make appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$multi_tutor_name.'"></i>
-										<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$multi_tutor_name.'"></i>';
-									}
-									else{
-										echo '
-										<div>Appointment full.</div>
-										<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$multi_tutor_name.'"></i>';
-									}
-									echo '
-									<div class="ui small modal register '.$check_date.' '.$period.' '.$multi_tutor_name.'">
-										<i class="close icon"></i>
-										<div class="header">
-											Make Appointment
-										</div>
-										<div class="content">
-											<form class="ui form register '.$check_date.' '.$period.' '.$multi_tutor_name.'" action="booking_update.php" method="post">
-											<input type="hidden" name="foreign" value="'.$foreign.'">
-											<div class="field">
-												<label>Full Name</label>
-												<input type="text" name="name" placeholder="Full Name (in Chinese)">
-											</div>
-											<div class="field">
-												<label>Student ID</label>
-												<input type="text" name="id" placeholder="Student ID">
-											</div>
-											<div class="field">
-												<label>Contact Number</label>
-												<input type="text" name="phone" placeholder="09xxxxxxxx">
-											</div>
-											<div class="field">
-												<label>Email</label>
-												<input type="text" name="email" placeholder="onlinelearning@mail.com">
-											</div>';
-											if($foreign==1){}
-											else{
-												echo '
-												<div class="field">
-												<label>Learning Content</label>
-												<select class="ui dropdown" name="learn_content">
-													<option value=""></option>';
-													foreach($tutor_desc_explode as $desc){
-														echo '<option value="'.trim($desc).'">'.trim($desc).'</option>';
-													}
-												echo '
-												</select>
-											</div>';
-											}
-										echo '
-										</div>
-										<div class="actions">
-												<input class="ui green button" type="submit" value="Submit">
-											<div class="ui black deny clear button">Cancel</div>
-											</form>
-										</div>
-									</div>';
+									<div><i class="teal user icon"></i>'.$appointment['id'].'</div>
+									<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$multi_tutor_name.'"></i>';
 								}
 								elseif($foreign == 1){
 									echo '
@@ -334,7 +274,6 @@ i{
 										</div>
 									</div>';
 								}
-
 							}
 							//No appointment
 							elseif($multi_tutor_name){
@@ -461,69 +400,9 @@ i{
 						//Appointment exist
 						elseif($appointment = mysql_fetch_assoc($appointment_sql)){
 							if($foreign == 0){
-								$tutor_desc_explode = explode(',', $tutor_desc[$check_tutor]);
 								echo '
-								<div><i class="teal user icon"></i>'.$appointment['id'].'</div>'; //The first appointment
-								while($appointment_foreign = mysql_fetch_array($appointment_sql)){
-									echo '<div><i class="teal user icon"></i>'.$appointment_foreign['id'].'</div>'; //Print the rest appointment of this foreign period excluding the first one
-								}
-								if($count_appointment_foreign<5){ //Maximum 5 appointments for foreign tutor
-									echo '
-									<i class="large teal book icon register" data-content="Make appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$check_tutor.'"></i>
-									<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$check_tutor.'"></i>';
-								}
-								else{
-									echo '
-									<div>Appointment full.</div>
-									<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$check_tutor.'"></i>';
-								}
-								echo '
-								<div class="ui small modal register '.$check_date.' '.$period.' '.$check_tutor.'">
-									<i class="close icon"></i>
-									<div class="header">
-										Make Appointment
-									</div>
-									<div class="content">
-										<form class="ui form register '.$check_date.' '.$period.' '.$check_tutor.'" action="booking_update.php" method="post">
-										<input type="hidden" name="foreign" value="'.$foreign.'">
-										<div class="field">
-											<label>Full Name</label>
-											<input type="text" name="name" placeholder="Full Name (in Chinese)">
-										</div>
-										<div class="field">
-											<label>Student ID</label>
-											<input type="text" name="id" placeholder="Student ID">
-										</div>
-										<div class="field">
-											<label>Contact Number</label>
-											<input type="text" name="phone" placeholder="09xxxxxxxx">
-										</div>
-										<div class="field">
-											<label>Email</label>
-											<input type="text" name="email" placeholder="onlinelearning@mail.com">
-										</div>';
-										if($foreign==1){}
-										elseif($foreign==0){
-											echo '
-											<div class="field">
-											<label>Learning Content</label>
-											<select class="ui dropdown" name="learn_content">
-												<option value=""></option>';
-												foreach($tutor_desc_explode as $desc){
-													echo '<option value="'.trim($desc).'">'.trim($desc).'</option>';
-												}
-											echo '
-											</select>
-										</div>';
-										}
-									echo '
-									</div>
-									<div class="actions">
-								    	<input class="ui green button" type="submit" value="Submit">
-										<div class="ui black deny clear button">Cancel</div>
-										</form>
-									</div>
-								</div>';
+								<div><i class="teal user icon"></i>'.$appointment['id'].'</div>
+								<i class="large teal edit icon" data-content="Cancel appointment" data-date="'.$check_date.'" data-period="'.$period.'" data-tutor="'.$check_tutor.'"></i>';
 							}
 							elseif($foreign == 1){
 								echo '
