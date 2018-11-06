@@ -102,6 +102,7 @@ i{
 		$schedule_sql = mysql_query("SELECT * FROM `schedule` WHERE `foreign`='$foreign' AND `semester`='$sem' AND `deleted`=0");
 		$i = 0; //Initialize
 		while($schedule = mysql_fetch_array($schedule_sql)){ //Data from db
+
 			$tutor_name[] = $schedule['tutor_name']; //List of tutor name
 			$tutor_desc[$schedule['tutor_name']] = $schedule['desc']; //Tutor skill description, using tutor name as hook //就是在這邊造成專長的覆蓋
 			$tutor_schedule[$i] = array($schedule['mon'],$schedule['tue'],$schedule['wed'],$schedule['thu'],$schedule['fri']); //List of each tutor's schedule, $tutor_schedule[tutor][day schedule]
@@ -128,6 +129,7 @@ i{
 				$horizon_period[$period] = array_merge_recursive_new($period_merge[$period], $horizon_period[$period]); //Merge all tutors' time
 			}
 		}
+		//以上可能就是出問題的地方
 		//Table result
 		foreach($periods as $period => $time){ //Vertical line
 
@@ -152,11 +154,11 @@ i{
 							$tutor_leave = mysql_fetch_assoc(mysql_query("SELECT * FROM `tutor_leave` WHERE `date`='$check_date' AND `period`='$period' AND `tutor`='$multi_tutor_name' AND `approve`=1"));
 
 							if($multi_tutor_name){ //Has tutor start
-								echo "<script>console.log('".$multi_tutor_name."');</script>";
+								//echo "<script>console.log('".var_dump($multi_tutor_name)."');</script>";
 								$str=$multi_tutor_name;
 								$str=explode('-',$str);
 								$str2=$str[0];
-								echo "<script>console.log('".$str2."');</script>";
+								//echo "<script>console.log('".$str2."');</script>";
 								echo '
 								<div class="ui secondary teal raised segment">
 									<div>'.$tutor_desc[$multi_tutor_name].' ('.$str2.')</div>';
