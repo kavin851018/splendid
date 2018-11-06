@@ -1,4 +1,5 @@
 <?php
+
 header('Content-type: application/json');
 $db = 'booking';
 require('../../connect_db.php');
