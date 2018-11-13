@@ -149,6 +149,8 @@ i{
 					echo '<td>';
 					if(is_array($check_tutor)){ //Multi tutor in one period
 
+//以下這段程式碼完成了同一個時段多個小老師的任務
+
 						$tutors=array();
 
 						while(is_array($check_tutor)){

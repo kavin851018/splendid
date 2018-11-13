@@ -107,7 +107,22 @@ h2{
 
 					echo '<td>';
 					if(is_array($check_tutor)){ //Multi tutor in one period
-						foreach($check_tutor as $multi_tutor_name){
+
+						$tutors=array();
+
+						while(is_array($check_tutor)){
+							$tutors[]=$check_tutor[1];
+							if(is_array($check_tutor[0])){
+									$check_tutor=$check_tutor[0];
+									continue;
+							}
+							else{
+								$tutors[]=$check_tutor[0];
+								break;
+							}
+						}
+
+						foreach($tutors as $multi_tutor_name){
 							$leave_check = mysql_fetch_assoc(mysql_query("SELECT * FROM `tutor_leave` WHERE `date`='$check_date' AND `period`='$period' AND `tutor`='$multi_tutor_name'"));
 							$appointment_sql = mysql_query("SELECT * FROM `appointment` WHERE `deleted`=0 AND `date`='$check_date' AND `period`='$period' AND `foreign`='$foreign' AND `tutor`='$multi_tutor_name'");
 							if($multi_tutor_name){ //Has tutor start
