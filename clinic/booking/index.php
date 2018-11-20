@@ -67,20 +67,20 @@ i{
 		echo '
 		<div class="ui teal buttons">
 			<a class="ui button left floated" href="/">自學園</a>
-			<a class="ui button left floated" href="./">英文小老師預約</a>
+			<a class="ui button left floated" href="./">一對一諮詢預約</a>
 		</div>
 		<a href="cpanel"><i class="grey right floated configure icon" style="float:right;"></i></a>
-		<h2 class="ui center aligned header" style="margin-top:-15px;">自學園 外籍小老師諮詢預約</h2>
+		<h2 class="ui center aligned header" style="margin-top:-15px;">自學園 一對多諮詢預約</h2>
 		<p style="text-align:center;color:red;font-weight:bold;font-size:16px;">同一時段可讓5位同學預約</p>';
 	}
 	else{ //Local tutor
 		echo '
 		<div class="ui teal buttons">
 			<a class="ui button left floated" href="/">自學園</a>
-			<a class="ui button left floated" href="?foreign=1">外籍小老師預約</a>
+			<a class="ui button left floated" href="?foreign=1">一對多諮詢預約</a>
 		</div>
 		<a href="cpanel"><i class="grey right floated configure icon" style="float:right;"></i></a>
-        <p><h2 class="ui center aligned header" style="margin-top:-15px;">自學園 英文小老師諮詢預約</h2><br /></p>';
+        <p><h2 class="ui center aligned header" style="margin-top:-15px;">自學園 一對一諮詢預約</h2><br /></p>';
 	}
 	echo '
 	<div class="ui inverted green success message"></div>
